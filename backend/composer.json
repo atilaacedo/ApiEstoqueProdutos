@@ -1,0 +1,20 @@
+{
+    "name": "batman-vascaino/backend",
+    "autoload": {
+        "files": [
+            "app/helpers/functions.php",
+            "app/helpers/constrants.php"
+        ],
+        "psr-4": {
+            "App\\":"app/",
+            "BatmanVascaino\\Backend\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "atilaacedo",
+            "email": "atilamacedo001@gmail.com"
+        }
+    ],
+    "require": {}
+}
