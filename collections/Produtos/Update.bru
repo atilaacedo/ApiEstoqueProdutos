@@ -1,0 +1,22 @@
+meta {
+  name: Update
+  type: http
+  seq: 5
+}
+
+put {
+  url: http://localhost:8000/api/produtos/2
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "preco" : 2.20
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
