@@ -29,18 +29,19 @@ class Database
         $this->port = $_ENV['DB_PORT'];
     }
 
-    public function getConnection()
+    public static function getConnection()
     {
-        if ($this->pdo === null) {
+        $db = new static();
+        if ($db->pdo === null) {
             try {
-                $dsn = "mysql:host={$this->host};port={$this->port};dbname={$this->dbname};charset={$this->charset}";
+                $dsn = "mysql:host={$db->host};port={$db->port};dbname={$db->dbname};charset={$db->charset}";
 
-                $this->pdo = new PDO($dsn, $this->user, $this->pass, [
+                $db->pdo = new PDO($dsn, $db->user, $db->pass, [
                     PDO::ATTR_PERSISTENT => true,
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
                     PDO::ATTR_EMULATE_PREPARES => false,
-                    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES {$this->charset}"
+                    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES {$db->charset}"
                 ]);
             } catch (PDOException $e) {
                 error_log("Erro de conexão: " . $e->getMessage());
@@ -48,6 +49,6 @@ class Database
             }
         }
 
-        return $this->pdo;
+        return $db->pdo;
     }
 }
